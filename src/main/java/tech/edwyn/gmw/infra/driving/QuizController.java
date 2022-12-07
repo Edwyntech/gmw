@@ -16,7 +16,7 @@ public class QuizController {
 
     @GetMapping
     public List<Quiz> getAll() {
-        return quizHandler.getAllForUser(1L); // TODO random id, will be replaced
+        return quizHandler.getAllQuizzesForUser(1L); // TODO random id, will be replaced
     }
 
     @PostMapping("/verify")

@@ -1,4 +1,6 @@
 package tech.edwyn.gmw.domain.model;
 
-public record Answer(Long id, String value) {
+import java.util.Optional;
+
+public record Answer(Long id, String value, Optional<String> imageUrl) {
 }

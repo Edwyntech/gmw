@@ -5,33 +5,34 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "answers")
+@Table(name = "questions")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Answer {
+public class QuestionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     @Column
-    private Boolean correct;
-    @Column
     private String text;
+    @Column(name = "image_url")
+    private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private Question question;
+    @OneToMany(mappedBy = "question")
+    @ToString.Exclude
+    private Set<AnswerEntity> answers;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Answer answer = (Answer) o;
-        return id != null && Objects.equals(id, answer.id);
+        QuestionEntity questionEntity = (QuestionEntity) o;
+        return id != null && Objects.equals(id, questionEntity.id);
     }
 
     @Override
