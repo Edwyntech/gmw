@@ -19,6 +19,8 @@ public class Question {
     private String type;
     @Column
     private String text;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers;

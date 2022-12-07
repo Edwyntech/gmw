@@ -7,6 +7,7 @@ import tech.edwyn.gmw.domain.model.TextAnswer;
 import tech.edwyn.gmw.domain.model.TextQuestion;
 import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +19,11 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     @Override
     public List<Quiz> getAll() {
         return questionRepository.findAll().stream()
+                .sorted(Comparator.comparing(Question::getId))
                 .map(question -> new Quiz(
-                        new TextQuestion(question.getId(), question.getText()),
+                        new TextQuestion(question.getId(), question.getText(), question.getImageUrl()),
                         question.getAnswers().stream()
+                                .sorted(Comparator.comparing(Answer::getId))
                                 .map(answer -> new TextAnswer(answer.getId(), answer.getText()))
                                 .collect(Collectors.toList())))
                 .collect(Collectors.toList());
@@ -30,7 +33,10 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     public Boolean isAnswerCorrect(Long questionId, Long answerId) {
         return questionRepository.findById(questionId)
                 .map(question -> question.getAnswers().stream()
-                        .filter(answer -> answer.getId().equals(answerId)).findFirst().map(Answer::getCorrect).orElse(false))
+                        .filter(answer -> answer.getId().equals(answerId))
+                        .findFirst()
+                        .map(Answer::getCorrect)
+                        .orElse(false))
                 .orElse(false);
     }
 }
