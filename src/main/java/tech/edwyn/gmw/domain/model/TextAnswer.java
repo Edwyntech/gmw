@@ -9,7 +9,7 @@ import tech.edwyn.gmw.domain.model.AnswerType;
 @RequiredArgsConstructor
 public class TextAnswer implements Answer {
 
-    private final Integer id;
+    private final Long id;
     private final String value;
 
     @Override

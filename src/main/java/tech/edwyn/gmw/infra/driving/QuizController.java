@@ -1,11 +1,10 @@
 package tech.edwyn.gmw.infra.driving;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.domain.QuizHandlerApi;
+import tech.edwyn.gmw.infra.driving.model.VerifyAnswerRequest;
 
 import java.util.List;
 
@@ -17,6 +16,11 @@ public class QuizController {
 
     @GetMapping
     public List<Quiz> getAll() {
-        return quizHandler.getAllForUser(1); // TODO random id, will be replaced
+        return quizHandler.getAllForUser(1L); // TODO random id, will be replaced
+    }
+
+    @PostMapping("/verify")
+    public Boolean verifyAnswer(@RequestBody VerifyAnswerRequest request) {
+        return quizHandler.verifyAnswer(request.getQuestionId(), request.getAnswerId());
     }
 }

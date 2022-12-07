@@ -13,9 +13,11 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer id;
+    private Long id;
     @Column
     private String type;
+    @Column
+    private Boolean correct;
     @Column
     private String text;
 

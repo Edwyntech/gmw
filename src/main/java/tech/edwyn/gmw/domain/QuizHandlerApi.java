@@ -6,5 +6,7 @@ import java.util.List;
 
 //driving
 public interface QuizHandlerApi {
-    List<Quiz> getAllForUser(Integer userId);
+    List<Quiz> getAllForUser(Long userId);
+
+    Boolean verifyAnswer(Long questionId, Long answerId);
 }

@@ -8,4 +8,6 @@ import java.util.List;
 // driven
 public interface QuizStoreSpi {
     List<Quiz> getAll();
+
+    Boolean isAnswerCorrect(Long questionId, Long answerId);
 }

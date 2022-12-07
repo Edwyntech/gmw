@@ -1,7 +1,7 @@
 package tech.edwyn.gmw.domain.model;
 
 public interface Answer {
-    Integer getId();
+    Long getId();
 
     AnswerType getType();
 

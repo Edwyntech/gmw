@@ -3,9 +3,9 @@ package tech.edwyn.gmw.infra.driven.store;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import tech.edwyn.gmw.domain.model.Quiz;
-import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 import tech.edwyn.gmw.domain.model.TextAnswer;
 import tech.edwyn.gmw.domain.model.TextQuestion;
+import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,5 +24,13 @@ public class QuizStoreAdapter implements QuizStoreSpi {
                                 .map(answer -> new TextAnswer(answer.getId(), answer.getText()))
                                 .collect(Collectors.toList())))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean isAnswerCorrect(Long questionId, Long answerId) {
+        return questionRepository.findById(questionId)
+                .map(question -> question.getAnswers().stream()
+                        .filter(answer -> answer.getId().equals(answerId)).findFirst().map(Answer::getCorrect).orElse(false))
+                .orElse(false);
     }
 }
