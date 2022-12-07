@@ -3,8 +3,8 @@ package tech.edwyn.gmw.infra.driven.store;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import tech.edwyn.gmw.domain.model.Quiz;
-import tech.edwyn.gmw.domain.model.TextAnswer;
-import tech.edwyn.gmw.domain.model.TextQuestion;
+import tech.edwyn.gmw.domain.model.Answer;
+import tech.edwyn.gmw.domain.model.Question;
 import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 
 import java.util.Comparator;
@@ -19,12 +19,12 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     @Override
     public List<Quiz> getAll() {
         return questionRepository.findAll().stream()
-                .sorted(Comparator.comparing(Question::getId))
+                .sorted(Comparator.comparing(tech.edwyn.gmw.infra.driven.store.Question::getId))
                 .map(question -> new Quiz(
-                        new TextQuestion(question.getId(), question.getText(), question.getImageUrl()),
+                        new Question(question.getId(), question.getText(), question.getImageUrl()),
                         question.getAnswers().stream()
-                                .sorted(Comparator.comparing(Answer::getId))
-                                .map(answer -> new TextAnswer(answer.getId(), answer.getText()))
+                                .sorted(Comparator.comparing(tech.edwyn.gmw.infra.driven.store.Answer::getId))
+                                .map(answer -> new Answer(answer.getId(), answer.getText()))
                                 .collect(Collectors.toList())))
                 .collect(Collectors.toList());
     }
@@ -35,7 +35,7 @@ public class QuizStoreAdapter implements QuizStoreSpi {
                 .map(question -> question.getAnswers().stream()
                         .filter(answer -> answer.getId().equals(answerId))
                         .findFirst()
-                        .map(Answer::getCorrect)
+                        .map(tech.edwyn.gmw.infra.driven.store.Answer::getCorrect)
                         .orElse(false))
                 .orElse(false);
     }

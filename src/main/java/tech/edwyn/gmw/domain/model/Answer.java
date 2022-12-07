@@ -1,9 +1,4 @@
 package tech.edwyn.gmw.domain.model;
 
-public interface Answer {
-    Long getId();
-
-    AnswerType getType();
-
-    Object getValue();
+public record Answer(Long id, String value) {
 }
