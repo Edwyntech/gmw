@@ -8,7 +8,7 @@ import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class QuizService implements QuizHandlerApi { // todo name Quiz
+public class QuizService implements QuizHandlerApi {
     private final QuizStoreSpi quizStore;
     private final AnswerStoreSpi answerStoreSpi;
 

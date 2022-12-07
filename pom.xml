@@ -24,6 +24,7 @@
         <slf4j.version>1.7.33</slf4j.version>
         <slf4jlog4j.version>1.7.33</slf4jlog4j.version>
         <assertj.version>3.22.0</assertj.version>
+        <springdoc.version>1.6.4</springdoc.version>
 
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
     </properties>
@@ -64,6 +65,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
     </dependencies>
 
