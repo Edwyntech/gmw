@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.domain.store.QuizStoreSpi;
+import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
+import tech.edwyn.gmw.infra.driven.store.entity.QuestionEntity;
 import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
+import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
 
 import java.util.Comparator;
 import java.util.List;
