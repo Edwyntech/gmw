@@ -6,4 +6,5 @@ import lombok.Data;
 public class VerifyAnswerRequest {
     private Long questionId;
     private Long answerId;
+    private String userName;
 }

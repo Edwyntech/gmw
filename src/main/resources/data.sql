@@ -12,6 +12,11 @@ create TABLE IF NOT EXISTS answers (
     image_url VARCHAR DEFAULT NULL
 );
 
+create TABLE IF NOT EXISTS users (
+    id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR NOT NULL unique
+);
+
 INSERT INTO questions values (1, 'Where does the name Edwyn come from?', 'https://images.pexels.com/photos/3683107/pexels-photo-3683107.jpeg?auto=compress&cs=tinysrgb&w=630&h=375&dpr=1');
 
 INSERT INTO answers values
