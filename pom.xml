@@ -27,9 +27,15 @@
         <springdoc.version>1.6.4</springdoc.version>
 
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
+        <swagger-ui.version>2.22.2</swagger-ui.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${swagger-ui.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
