@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,6 +28,9 @@ public class QuestionEntity {
     @OneToMany(mappedBy = "question")
     @ToString.Exclude
     private Set<AnswerEntity> answers;
+
+    @ManyToMany(mappedBy = "userCorrectQuestions")
+    private Set<UserEntity> users = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

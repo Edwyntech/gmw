@@ -8,5 +8,5 @@ import java.util.List;
 public interface QuizHandlerApi {
     List<Quiz> getAllQuizzesForUser(Long userId);
 
-    Boolean verifyAnswer(Long questionId, Long answerId);
+    Boolean verifyAnswer(Long questionId, Long answerId, String userName);
 }

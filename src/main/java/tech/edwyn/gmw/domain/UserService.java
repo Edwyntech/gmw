@@ -20,4 +20,9 @@ public class UserService implements UserHandlerApi {
     public Boolean hasAlreadyName(String name) {
         return userStoreSpi.hasAlreadyName(name);
     }
+
+    @Override
+    public Integer getScore(String name) {
+        return userStoreSpi.getScore(name);
+    }
 }

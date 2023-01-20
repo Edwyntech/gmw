@@ -13,8 +13,12 @@ create TABLE IF NOT EXISTS answers (
 );
 
 create TABLE IF NOT EXISTS users (
-    id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR NOT NULL unique
+);
+
+create TABLE IF NOT EXISTS user_correct_answers (
+    user_name VARCHAR NOT NULL,
+    question_id   INTEGER NOT NULL
 );
 
 INSERT INTO questions values (1, 'Where does the name Edwyn come from?', 'https://images.pexels.com/photos/3683107/pexels-photo-3683107.jpeg?auto=compress&cs=tinysrgb&w=630&h=375&dpr=1');
@@ -30,3 +34,5 @@ INSERT INTO answers values
 (4, 'Slack, Gmail', false, 2, null),
 (5, 'Teams, Outlook', true, 2, null),
 (6, 'Google meets', false, 2, null);
+
+INSERT INTO users values ('alex');

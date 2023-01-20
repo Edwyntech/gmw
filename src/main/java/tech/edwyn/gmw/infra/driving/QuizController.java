@@ -21,6 +21,7 @@ public class QuizController {
 
     @PostMapping("/verify")
     public Boolean verifyAnswer(@RequestBody VerifyAnswerRequest request) {
-        return quizHandler.verifyAnswer(request.getQuestionId(), request.getAnswerId());
+        // TODO refactoring
+        return quizHandler.verifyAnswer(request.getQuestionId(), request.getAnswerId(), request.getUserName());
     }
 }

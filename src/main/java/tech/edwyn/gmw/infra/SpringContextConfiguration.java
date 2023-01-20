@@ -15,8 +15,8 @@ import tech.edwyn.gmw.domain.store.UserStoreSpi;
 @ComponentScan
 public class SpringContextConfiguration {
     @Bean
-    public QuizHandlerApi quizHandlerApi(final QuizStoreSpi quizStoreSpi, final AnswerStoreSpi answerStoreSpi) {
-        return new QuizService(quizStoreSpi, answerStoreSpi);
+    public QuizHandlerApi quizHandlerApi(final QuizStoreSpi quizStoreSpi, final AnswerStoreSpi answerStoreSpi, final UserStoreSpi userStoreSpi) {
+        return new QuizService(quizStoreSpi, answerStoreSpi, userStoreSpi);
     }
 
     @Bean
