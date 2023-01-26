@@ -35,4 +35,11 @@ INSERT INTO answers values
 (5, 'Teams, Outlook', true, 2, null),
 (6, 'Google meets', false, 2, null);
 
+INSERT INTO questions values (3, 'Guess my W', 'https://www.edwyn.tech/wp-content/uploads/2021/08/symbol-07.png');
+
+INSERT INTO answers values
+(7, 'Mehdi', false, 3, null),
+(8, 'Jerome', true, 3, null),
+(9, 'Moustapha', false, 3, null);
+
 INSERT INTO users values ('alex');
