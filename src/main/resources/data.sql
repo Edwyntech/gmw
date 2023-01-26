@@ -42,4 +42,11 @@ INSERT INTO answers values
 (8, 'Jerome', true, 3, null),
 (9, 'Moustapha', false, 3, null);
 
+INSERT INTO questions values (4, '', 'https://www.edwyn.tech/wp-content/uploads/2021/08/Sujet-10.png');
+
+INSERT INTO answers values
+(10, 'Michaël', false, 4, null),
+(11, 'Vincent', true, 4, null),
+(12, 'Pierrick', false, 4, null);
+
 INSERT INTO users values ('alex');
