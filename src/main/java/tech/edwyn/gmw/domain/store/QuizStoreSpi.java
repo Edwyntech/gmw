@@ -7,5 +7,9 @@ import java.util.List;
 
 // driven
 public interface QuizStoreSpi {
-    List<Quiz> getAllQuizzes();
+    List<Quiz> getAll();
+
+    Quiz getDefaultQuiz();
+
+    Quiz getQuiz(Long id);
 }

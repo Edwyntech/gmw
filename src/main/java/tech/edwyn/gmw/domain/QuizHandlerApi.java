@@ -6,7 +6,11 @@ import java.util.List;
 
 //driving
 public interface QuizHandlerApi {
-    List<Quiz> getAllQuizzesForUser(Long userId);
+    List<Quiz> getAllQuizzes();
+
+    Quiz getDefaultQuiz();
+
+    Quiz getQuiz(Long quizId);
 
     Boolean verifyAnswer(Long questionId, Long answerId, String userName);
 }

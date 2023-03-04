@@ -9,39 +9,29 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "questions")
+@Table(name = "quizzes")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionEntity {
+public class QuizEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     @Column
-    private String text;
-    @Column(name = "image_url")
-    private String imageUrl;
+    private String name;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "quiz")
     @ToString.Exclude
-    private Set<AnswerEntity> answers;
-
-    @ManyToMany(mappedBy = "userCorrectQuestions")
-    private Set<UserEntity> users = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private QuizEntity quiz;
-
+    private Set<QuestionEntity> questions;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        QuestionEntity questionEntity = (QuestionEntity) o;
+        QuizEntity questionEntity = (QuizEntity) o;
         return id != null && Objects.equals(id, questionEntity.id);
     }
 

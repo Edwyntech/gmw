@@ -15,8 +15,18 @@ public class QuizService implements QuizHandlerApi {
     private final UserStoreSpi userStoreSpi;
 
     @Override
-    public List<Quiz> getAllQuizzesForUser(Long userId) {
-        return quizStore.getAllQuizzes();
+    public List<Quiz> getAllQuizzes() {
+        return quizStore.getAll();
+    }
+
+    @Override
+    public Quiz getDefaultQuiz() {
+        return quizStore.getDefaultQuiz();
+    }
+
+    @Override
+    public Quiz getQuiz(Long quizId) {
+        return quizStore.getQuiz(quizId);
     }
 
     @Override
