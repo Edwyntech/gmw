@@ -21,7 +21,7 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     @Override
     public List<Quiz> getAll() {
         return quizRepository.findAll().stream()
-                .map(quiz -> new Quiz(quiz.getQuestions().stream()
+                .map(quiz -> new Quiz(quiz.getId(), quiz.getQuestions().stream()
                         .map(questionEntity -> new QuestionWithAnswers(
                                 QuizMapper.toDomain(questionEntity),
                                 questionEntity.getAnswers().stream()
@@ -39,16 +39,15 @@ public class QuizStoreAdapter implements QuizStoreSpi {
 
     @Override
     public Quiz getQuiz(Long id) {
-        var questionsWithAnswers = quizRepository.findById(id)
-                .map(quiz -> quiz.getQuestions().stream()
+        return quizRepository.findById(id)
+                .map(quiz -> new Quiz(quiz.getId(), quiz.getQuestions().stream()
                         .map(questionEntity -> new QuestionWithAnswers(
                                 QuizMapper.toDomain(questionEntity),
                                 questionEntity.getAnswers().stream()
                                         .sorted(Comparator.comparing(AnswerEntity::getId))
                                         .map(QuizMapper::toDomain)
                                         .collect(Collectors.toList())))
-                        .collect(Collectors.toList())).orElseThrow();
-
-        return new Quiz(questionsWithAnswers);
+                        .collect(Collectors.toList())))
+                .orElseThrow();
     }
 }
