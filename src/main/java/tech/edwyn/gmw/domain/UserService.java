@@ -9,13 +9,13 @@ public class UserService implements UserHandlerApi {
     private final UserStoreSpi userStoreSpi;
 
     @Override
-    public User add(String name) {
-        return userStoreSpi.add(name);
+    public User add(String firstName, String lastName, String email) {
+        return userStoreSpi.add(firstName, lastName, email);
     }
 
     @Override
-    public Boolean hasAlreadyName(String name) {
-        return userStoreSpi.hasAlreadyName(name);
+    public Boolean hasAlreadyName(String email) {
+        return userStoreSpi.hasAlreadyEmail(email);
     }
 
     @Override

@@ -5,12 +5,14 @@ import tech.edwyn.gmw.infra.driven.store.entity.UserEntity;
 
 public class UserMapper {
     public static User toDomain(UserEntity entity) {
-        return new User(entity.getName()); // TODO add score in the model
+        return new User(entity.getFirstName(), entity.getLastName(), entity.getEmail());
     }
 
-    public static UserEntity toEntity(String name) {
+    public static UserEntity toEntity(String firstName, String lastName, String email) {
         var user =  new UserEntity();
-        user.setName(name);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
         return user;
     }
 }

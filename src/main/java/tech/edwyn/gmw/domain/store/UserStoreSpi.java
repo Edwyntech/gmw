@@ -5,9 +5,9 @@ import tech.edwyn.gmw.domain.model.User;
 
 // driven
 public interface UserStoreSpi {
-    User add(String name);
+    User add(String firstName, String lastName, String email);
 
-    Boolean hasAlreadyName(String name);
+    Boolean hasAlreadyEmail(String email);
 
     User addCorrectQuestion(String name, Long questionId);
 

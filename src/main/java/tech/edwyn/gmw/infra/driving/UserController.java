@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tech.edwyn.gmw.domain.UserHandlerApi;
 import tech.edwyn.gmw.domain.model.User;
+import tech.edwyn.gmw.infra.driving.model.AddUserRequest;
+import tech.edwyn.gmw.infra.driving.model.VerifyAnswerRequest;
 
 @RestController
 @RequestMapping("/users")
@@ -11,14 +13,14 @@ import tech.edwyn.gmw.domain.model.User;
 public class UserController {
     private final UserHandlerApi userHandlerApi;
 
-    @GetMapping("/verify/{name}")
-    public Boolean verifyName(@PathVariable String name) {
-        return userHandlerApi.hasAlreadyName(name);
+    @GetMapping("/verify/{email}")
+    public Boolean verifyEmail(@PathVariable String email) {
+        return userHandlerApi.hasAlreadyName(email);
     }
 
-    @PostMapping("/{name}")
-    public User add(@PathVariable String name) {
-        return userHandlerApi.add(name);
+    @PostMapping
+    public User add(@RequestBody AddUserRequest request) {
+        return userHandlerApi.add(request.getFirstName(), request.getLastName(), request.getEmail());
     }
 
     @GetMapping("/{name}/score")

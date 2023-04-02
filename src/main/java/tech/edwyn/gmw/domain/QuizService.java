@@ -30,11 +30,11 @@ public class QuizService implements QuizHandlerApi {
     }
 
     @Override
-    public Boolean verifyAnswer(Long questionId, Long answerId, String userName) {
+    public Boolean verifyAnswer(Long questionId, Long answerId, String email) {
         var isCorrectAnswer = answerStoreSpi.findIsCorrectByQuestionId(questionId, answerId);
 
         if (isCorrectAnswer) {
-            userStoreSpi.addCorrectQuestion(userName, questionId);
+            userStoreSpi.addCorrectQuestion(email, questionId);
         }
 
         return isCorrectAnswer;

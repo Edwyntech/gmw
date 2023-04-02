@@ -12,5 +12,5 @@ public interface QuizHandlerApi {
 
     Quiz getQuiz(Long quizId);
 
-    Boolean verifyAnswer(Long questionId, Long answerId, String userName);
+    Boolean verifyAnswer(Long questionId, Long answerId, String email);
 }

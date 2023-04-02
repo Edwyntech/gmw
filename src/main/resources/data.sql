@@ -19,7 +19,10 @@ create TABLE IF NOT EXISTS answers (
 );
 
 create TABLE IF NOT EXISTS users (
-    name VARCHAR NOT NULL unique
+    id   INTEGER  PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    email VARCHAR NOT NULL unique
 );
 
 create TABLE IF NOT EXISTS user_correct_answers (
@@ -65,4 +68,4 @@ insert into answers values
 (13, 'Yes', true, 5, null),
 (14, 'No', false, 5, null);
 
-insert into users values ('alex');
+insert into users values (1, 'alex', 'alexlastname', 'alex@gmail.com');

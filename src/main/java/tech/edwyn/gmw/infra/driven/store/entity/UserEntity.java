@@ -17,8 +17,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private String name;
+    private Long id;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String email;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -33,7 +43,7 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         UserEntity that = (UserEntity) o;
-        return name != null && Objects.equals(name, that.name);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

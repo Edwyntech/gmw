@@ -4,7 +4,7 @@ import tech.edwyn.gmw.domain.model.User;
 
 //driving
 public interface UserHandlerApi {
-    User add(String name);
+    User add(String firstName, String lastName, String email);
 
     Boolean hasAlreadyName(String name);
 
