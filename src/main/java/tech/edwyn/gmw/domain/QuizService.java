@@ -15,6 +15,11 @@ public class QuizService implements QuizHandlerApi {
     private final UserStoreSpi userStoreSpi;
 
     @Override
+    public Quiz createQuiz(Quiz quiz) {
+        return quizStore.save(quiz);
+    }
+
+    @Override
     public List<Quiz> getAllQuizzes() {
         return quizStore.getAll();
     }
@@ -27,6 +32,29 @@ public class QuizService implements QuizHandlerApi {
     @Override
     public Quiz getQuiz(Long quizId) {
         return quizStore.getQuiz(quizId);
+    }
+
+    @Override
+    public Quiz updateQuiz(Quiz quiz) {
+        var quizFound = quizStore.getQuiz(quiz.id());
+
+        if (quizFound == null) throw new QuizNotFoundException("Quiz not found");
+
+        quizFound.toBuilder()
+                .name(quiz.name())
+                .questionWithAnswers(quiz.questionWithAnswers())
+                .build();
+
+        return quizStore.save(quizFound);
+    }
+
+    @Override
+    public void deleteQuiz(Long quizId) {
+        var quizFound = quizStore.getQuiz(quizId);
+
+        if (quizFound == null) throw new QuizNotFoundException("Quiz not found");
+
+        quizStore.delete(quizId);
     }
 
     @Override

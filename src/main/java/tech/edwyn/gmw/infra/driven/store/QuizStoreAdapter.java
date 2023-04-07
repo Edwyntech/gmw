@@ -15,6 +15,12 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     private final QuizRepository quizRepository;
 
     @Override
+    public Quiz save(Quiz quiz) {
+        var quizEntity = quizRepository.save(QuizMapper.toEntity(quiz));
+        return QuizMapper.toDomain(quizEntity);
+    }
+
+    @Override
     public List<Quiz> getAll() {
         return quizRepository.findAll().stream()
                 .map(QuizMapper::toDomain)
@@ -31,5 +37,10 @@ public class QuizStoreAdapter implements QuizStoreSpi {
         return quizRepository.findById(id)
                 .map(QuizMapper::toDomain)
                 .orElseThrow();
+    }
+
+    @Override
+    public void delete(Long id) {
+        quizRepository.deleteById(id);
     }
 }

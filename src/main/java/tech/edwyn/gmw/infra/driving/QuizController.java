@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tech.edwyn.gmw.domain.QuizHandlerApi;
 import tech.edwyn.gmw.domain.model.Quiz;
+import tech.edwyn.gmw.infra.driving.model.CreateQuizRequest;
+import tech.edwyn.gmw.infra.driving.model.UpdateQuizRequest;
 import tech.edwyn.gmw.infra.driving.model.VerifyAnswerRequest;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,6 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuizController {
     private final QuizHandlerApi quizHandler;
+
+    @PostMapping()
+    public void createQuiz(@Valid @RequestBody CreateQuizRequest quiz) {
+        quizHandler.createQuiz(quiz.toDomain());
+    }
 
     @GetMapping
     public List<Quiz> getAll() {
@@ -29,8 +37,19 @@ public class QuizController {
         return quizHandler.getQuiz(quizId);
     }
 
+    @PutMapping()
+    public void updateQuiz(@Valid @RequestBody UpdateQuizRequest quiz) {
+        quizHandler.updateQuiz(quiz.toDomain());
+    }
+
+    @DeleteMapping("/{quizId}")
+    public void deleteQuiz(@PathVariable Long quizId) {
+        quizHandler.deleteQuiz(quizId);
+    }
+
     @PostMapping("/verify")
     public Boolean verifyAnswer(@RequestBody VerifyAnswerRequest request) {
         return quizHandler.verifyAnswer(request.getQuestionId(), request.getAnswerId(), request.getEmail());
     }
+
 }
