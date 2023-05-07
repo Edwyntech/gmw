@@ -1,8 +1,10 @@
 package tech.edwyn.gmw.domain;
 
 import lombok.RequiredArgsConstructor;
+import tech.edwyn.gmw.domain.model.Score;
 import tech.edwyn.gmw.domain.model.User;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
+import tech.edwyn.gmw.infra.driving.model.ScoreResponse;
 
 @RequiredArgsConstructor
 public class UserService implements UserHandlerApi {
@@ -19,7 +21,11 @@ public class UserService implements UserHandlerApi {
     }
 
     @Override
-    public Integer getScore(String name) {
-        return userStoreSpi.getScore(name);
+    public ScoreResponse getScore(String name, Long quizId) {
+        Score score = userStoreSpi.getScore(name, quizId);
+        return ScoreResponse.builder()
+                .score(0)
+                .name(name)
+                .build();
     }
 }

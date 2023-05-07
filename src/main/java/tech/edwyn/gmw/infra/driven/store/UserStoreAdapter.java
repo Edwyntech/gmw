@@ -4,11 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+import tech.edwyn.gmw.domain.model.Question;
+import tech.edwyn.gmw.domain.model.Score;
 import tech.edwyn.gmw.domain.model.User;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
+import tech.edwyn.gmw.infra.driven.store.exception.GMWException;
 import tech.edwyn.gmw.infra.driven.store.mapper.UserMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
+import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;
 import tech.edwyn.gmw.infra.driven.store.repository.UserRepository;
+
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -17,6 +23,7 @@ import static java.lang.String.format;
 public class UserStoreAdapter implements UserStoreSpi {
     private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
+    private final QuizRepository quizRepository;
 
     @Override
     public User add(String firstName, String lastName, String email) {
@@ -45,9 +52,31 @@ public class UserStoreAdapter implements UserStoreSpi {
     }
 
     @Override
-    public Integer getScore(String email) {
-        return userRepository.findByEmail(email)
+    public Score getScore(String email, Long quizId) {
+        Integer scoreValue = userRepository.findByEmail(email)
                 .map(user -> user.getUserCorrectQuestions().size())
                 .orElse(0);
+
+        int maxScore = getMaxScore(quizId);
+        return Score.builder()
+                .score(scoreValue)
+                .maxScore(maxScore)
+                .text(null)
+                .build();
+    }
+
+    @Override
+    public List<Question> getSuccessfullyQuestions(String email, Long quizId) {
+
+        return userRepository.findByEmail(email)
+                .map(user -> user.getUserCorrectQuestions()
+                ).orElseThrow().stream().
+                map(QuestionMapper::toDomain).toList();
+    }
+
+    private int getMaxScore(Long quizId) {
+        int maxScore = quizRepository.findById(quizId).
+                orElseThrow(() -> new GMWException("Quiz not found")).getQuestions().size();
+        return maxScore;
     }
 }

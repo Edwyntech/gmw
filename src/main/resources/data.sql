@@ -58,7 +58,7 @@ insert into answers values
 insert into questions values (4, '', 'https://www.edwyn.tech/wp-content/uploads/2021/08/Sujet-10.png', 1);
 
 insert into answers values
-(10, 'Michaël', true, 4, null),
+(10, 'Michael', true, 4, null),
 (11, 'Vincent', false, 4, null),
 (12, 'Pierrick', false, 4, null);
 

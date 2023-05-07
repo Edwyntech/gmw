@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.edwyn.gmw.domain.UserHandlerApi;
 import tech.edwyn.gmw.domain.model.User;
 import tech.edwyn.gmw.infra.driving.model.AddUserRequest;
-import tech.edwyn.gmw.infra.driving.model.VerifyAnswerRequest;
+import tech.edwyn.gmw.infra.driving.model.ScoreResponse;
 
 @RestController
 @RequestMapping("/users")
@@ -23,8 +23,8 @@ public class UserController {
         return userHandlerApi.add(request.getFirstName(), request.getLastName(), request.getEmail());
     }
 
-    @GetMapping("/{name}/score")
-    public Integer getScore(@PathVariable String name) {
-        return userHandlerApi.getScore(name);
+    @GetMapping("/{name}/{quizzId}/score")
+    public ScoreResponse getScore(@PathVariable String name, @RequestParam Long quizzId) {
+        return userHandlerApi.getScore(name, quizzId);
     }
 }
