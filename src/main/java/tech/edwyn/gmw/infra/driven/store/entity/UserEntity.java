@@ -1,6 +1,6 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -8,13 +8,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

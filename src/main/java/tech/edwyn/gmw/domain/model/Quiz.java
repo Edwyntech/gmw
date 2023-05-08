@@ -1,6 +1,9 @@
 package tech.edwyn.gmw.domain.model;
 
+import lombok.Builder;
+
 import java.util.List;
 
-public record Quiz(Long id, List<QuestionWithAnswers> questionWithAnswers) {
+@Builder(toBuilder = true)
+public record Quiz(Long id, String name, List<QuestionWithAnswers> questionWithAnswers) {
 }

@@ -8,13 +8,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Data
+@Builder
 @Entity
 @Table(name = "questions")
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class QuestionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
