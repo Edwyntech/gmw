@@ -21,11 +21,8 @@ public class UserService implements UserHandlerApi {
     }
 
     @Override
-    public ScoreResponse getScore(String name, Long quizId) {
-        Score score = userStoreSpi.getScore(name, quizId);
-        return ScoreResponse.builder()
-                .score(0)
-                .name(name)
-                .build();
+    public ScoreResponse getScore(String email, Long quizId) {
+        Score score = userStoreSpi.getScore(email, quizId);
+        return new ScoreResponse(email, score.getScore(), score.getText());
     }
 }

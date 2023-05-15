@@ -53,11 +53,11 @@ public class UserStoreAdapter implements UserStoreSpi {
 
     @Override
     public Score getScore(String email, Long quizId) {
-        Integer scoreValue = userRepository.findByEmail(email)
+        var scoreValue = userRepository.findByEmail(email)
                 .map(user -> user.getUserCorrectQuestions().size())
                 .orElse(0);
-
-        int maxScore = getMaxScore(quizId);
+        var maxScore = getMaxScore(quizId);
+        var text = "TODO: add text depening on the score";
         return Score.builder()
                 .score(scoreValue)
                 .maxScore(maxScore)
@@ -75,8 +75,8 @@ public class UserStoreAdapter implements UserStoreSpi {
     }
 
     private int getMaxScore(Long quizId) {
-        int maxScore = quizRepository.findById(quizId).
-                orElseThrow(() -> new GMWException("Quiz not found")).getQuestions().size();
-        return maxScore;
+        return quizRepository
+                .findById(quizId)
+                .orElseThrow(() -> new GMWException("Quiz not found")).getQuestions().size();
     }
 }
