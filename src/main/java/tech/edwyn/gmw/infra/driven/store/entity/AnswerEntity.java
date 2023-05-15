@@ -1,7 +1,9 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "answers")
+@AllArgsConstructor
+@NoArgsConstructor
 public class AnswerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ public class QuestionMapper {
         return Question.builder()
                 .id(questionEntity.getId())
                 .value(questionEntity.getText())
-                .imageUrl(Optional.of(questionEntity.getImageUrl()))
+                .imageUrl(Optional.ofNullable(questionEntity.getImageUrl()))
                 .build();
     }
 }
