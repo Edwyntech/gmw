@@ -61,7 +61,7 @@ public class UserStoreAdapter implements UserStoreSpi {
         return Score.builder()
                 .score(scoreValue)
                 .maxScore(maxScore)
-                .text(null)
+                .text(text)
                 .build();
     }
 
