@@ -23,7 +23,7 @@ public class UserController {
         return userHandlerApi.add(request.getFirstName(), request.getLastName(), request.getEmail());
     }
 
-    @GetMapping("/{name}/{quizId}/score")
+    @GetMapping("/{name}/score")
     public ScoreResponse getScore(@PathVariable String name, @RequestParam Long quizId) {
         return userHandlerApi.getScore(name, quizId);
     }
