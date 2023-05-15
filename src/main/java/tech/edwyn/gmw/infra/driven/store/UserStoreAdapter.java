@@ -8,6 +8,7 @@ import tech.edwyn.gmw.domain.model.*;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
 import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
 import tech.edwyn.gmw.infra.driven.store.exception.GMWException;
+import tech.edwyn.gmw.infra.driven.store.mapper.AnswerMapper;
 import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.mapper.UserMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
@@ -87,10 +88,10 @@ public class UserStoreAdapter implements UserStoreSpi {
                         .map(correctQuestion -> {
                             var quizEntity = correctQuestion.getQuiz();
                             return new Quiz(quizEntity.getId(), quizEntity.getName(), true, quizEntity.getQuestions().stream().map(questionEntity -> new QuestionWithAnswers(
-                                    QuizMapper.toDomain(questionEntity),
+                                    QuestionMapper.toDomain(questionEntity),
                                     questionEntity.getAnswers().stream()
                                             .sorted(Comparator.comparing(AnswerEntity::getId))
-                                            .map(QuizMapper::toDomain)
+                                            .map(AnswerMapper::toDomain)
                                             .collect(Collectors.toList()))).collect(Collectors.toList()));
                         })
                         .collect(Collectors.toList()))

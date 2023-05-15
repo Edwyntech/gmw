@@ -26,12 +26,6 @@ public class QuizController {
     public void createQuiz(@Valid @RequestBody CreateQuizRequest quiz) {
         quizHandler.createQuiz(quiz.toDomain());
     }
-
-    @GetMapping
-    public List<Quiz> getAll() {
-        return quizHandler.getAllQuizzes();
-    }
-
     @GetMapping("/default")
     public Quiz getDefaultQuiz() {
         return quizHandler.getDefaultQuiz();

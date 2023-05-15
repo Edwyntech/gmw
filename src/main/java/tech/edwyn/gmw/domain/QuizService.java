@@ -47,7 +47,7 @@ public class QuizService implements QuizHandlerApi {
         if (quizFound == null) throw new QuizNotFoundException("Quiz not found");
 
         quizFound.toBuilder()
-                .name(quiz.name())
+                .description(quiz.description())
                 .questionWithAnswers(quiz.questionWithAnswers())
                 .build();
 

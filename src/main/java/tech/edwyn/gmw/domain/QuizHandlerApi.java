@@ -9,8 +9,6 @@ public interface QuizHandlerApi {
     List<Quiz> getAllQuizzes(String email);
     Quiz createQuiz(Quiz quiz);
 
-    List<Quiz> getAllQuizzes();
-
     Quiz getDefaultQuiz();
 
     Quiz getQuiz(Long quizId);
