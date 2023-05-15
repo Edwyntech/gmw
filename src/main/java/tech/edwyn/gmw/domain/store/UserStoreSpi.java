@@ -1,7 +1,11 @@
 
 package tech.edwyn.gmw.domain.store;
 
+import tech.edwyn.gmw.domain.model.Question;
+import tech.edwyn.gmw.domain.model.Score;
 import tech.edwyn.gmw.domain.model.User;
+
+import java.util.List;
 
 // driven
 public interface UserStoreSpi {
@@ -11,5 +15,7 @@ public interface UserStoreSpi {
 
     User addCorrectQuestion(String name, Long questionId);
 
-    Integer getScore(String name);
+    Score getScore(String name, Long quizId);
+
+    List<Question> getSuccessfullyQuestions(String email, Long quizId);
 }

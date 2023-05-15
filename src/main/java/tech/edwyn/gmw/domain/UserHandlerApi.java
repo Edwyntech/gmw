@@ -1,6 +1,7 @@
 package tech.edwyn.gmw.domain;
 
 import tech.edwyn.gmw.domain.model.User;
+import tech.edwyn.gmw.infra.driving.model.ScoreResponse;
 
 //driving
 public interface UserHandlerApi {
@@ -8,5 +9,5 @@ public interface UserHandlerApi {
 
     Boolean hasAlreadyName(String name);
 
-    Integer getScore(String name);
+    ScoreResponse getScore(String name, Long quizzId);
 }
