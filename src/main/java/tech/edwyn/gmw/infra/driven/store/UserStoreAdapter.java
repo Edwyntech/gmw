@@ -4,17 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
-import tech.edwyn.gmw.domain.model.Question;
-import tech.edwyn.gmw.domain.model.Score;
-import tech.edwyn.gmw.domain.model.User;
+import tech.edwyn.gmw.domain.model.*;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
+import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
 import tech.edwyn.gmw.infra.driven.store.exception.GMWException;
+import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.mapper.UserMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
 import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;
 import tech.edwyn.gmw.infra.driven.store.repository.UserRepository;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -54,10 +57,13 @@ public class UserStoreAdapter implements UserStoreSpi {
     @Override
     public Score getScore(String email, Long quizId) {
         var scoreValue = userRepository.findByEmail(email)
-                .map(user -> user.getUserCorrectQuestions().size())
+                .map(user -> user.getUserCorrectQuestions().stream()
+                        .filter(correctQuestion -> correctQuestion.getQuiz().getId().equals(quizId)).toList()
+                        .size())
                 .orElse(0);
         var maxScore = getMaxScore(quizId);
-        var text = "TODO: add text depening on the score";
+        var scorePercentage = (double) scoreValue / maxScore;
+        var text = scorePercentage > 0.5 ? "Bravo !": "";
         return Score.builder()
                 .score(scoreValue)
                 .maxScore(maxScore)
@@ -72,6 +78,25 @@ public class UserStoreAdapter implements UserStoreSpi {
                 .map(user -> user.getUserCorrectQuestions()
                 ).orElseThrow().stream().
                 map(QuestionMapper::toDomain).toList();
+    }
+
+    @Override
+    public List<Quiz> getCompletedQuizzes(String email) {
+        List<Quiz> quizzes = userRepository.findByEmail(email)
+                .map(userEntity -> userEntity.getUserCorrectQuestions().stream()
+                        .map(correctQuestion -> {
+                            var quizEntity = correctQuestion.getQuiz();
+                            return new Quiz(quizEntity.getId(), quizEntity.getName(), true, quizEntity.getQuestions().stream().map(questionEntity -> new QuestionWithAnswers(
+                                    QuizMapper.toDomain(questionEntity),
+                                    questionEntity.getAnswers().stream()
+                                            .sorted(Comparator.comparing(AnswerEntity::getId))
+                                            .map(QuizMapper::toDomain)
+                                            .collect(Collectors.toList()))).collect(Collectors.toList()));
+                        })
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
+
+        return quizzes.stream().distinct().collect(Collectors.toList());
     }
 
     private int getMaxScore(Long quizId) {

@@ -2,6 +2,7 @@
 package tech.edwyn.gmw.domain.store;
 
 import tech.edwyn.gmw.domain.model.Question;
+import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.domain.model.Score;
 import tech.edwyn.gmw.domain.model.User;
 
@@ -18,4 +19,6 @@ public interface UserStoreSpi {
     Score getScore(String name, Long quizId);
 
     List<Question> getSuccessfullyQuestions(String email, Long quizId);
+
+    List<Quiz> getCompletedQuizzes(String email);
 }

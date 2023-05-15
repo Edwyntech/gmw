@@ -17,6 +17,11 @@ import java.util.List;
 public class QuizController {
     private final QuizHandlerApi quizHandler;
 
+    @GetMapping("/user/{email}")
+    public List<Quiz> getAll(@PathVariable String email) {
+        return quizHandler.getAllQuizzes(email);
+    }
+
     @PostMapping()
     public void createQuiz(@Valid @RequestBody CreateQuizRequest quiz) {
         quizHandler.createQuiz(quiz.toDomain());
