@@ -1,24 +1,42 @@
 package tech.edwyn.gmw.infra.driven.store.mapper;
 
-import tech.edwyn.gmw.domain.model.Answer;
-import tech.edwyn.gmw.domain.model.Question;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import tech.edwyn.gmw.domain.model.QuestionWithAnswers;
+import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
-import tech.edwyn.gmw.infra.driven.store.entity.QuestionEntity;
+import tech.edwyn.gmw.infra.driven.store.entity.QuizEntity;
 
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class QuizMapper {
-    public static Question toDomain(QuestionEntity entity) {
-        return new Question(
-                entity.getId(),
-                entity.getText(),
-                Optional.ofNullable(entity.getImageUrl()));
+
+    public static Quiz toDomain(QuizEntity quizEntity) {
+        return Quiz.builder()
+                .id(quizEntity.getId())
+                .name(quizEntity.getName())
+                .questionWithAnswers(quizEntity.getQuestions().stream()
+                        .map(questionEntity -> QuestionWithAnswers.builder()
+                                .question(QuestionMapper.toDomain(questionEntity))
+                                .answers(questionEntity.getAnswers().stream()
+                                        .sorted(Comparator.comparing(AnswerEntity::getId))
+                                        .map(AnswerMapper::toDomain)
+                                        .toList())
+                                .build())
+                        .toList())
+                .build();
     }
 
-    public static Answer toDomain(AnswerEntity entity) {
-        return new Answer(
-                entity.getId(),
-                entity.getText(),
-                Optional.ofNullable(entity.getImageUrl()));
+    public static QuizEntity toEntity(Quiz quiz) {
+        return  QuizEntity.builder()
+                .id(quiz.id())
+                .name(quiz.name())
+                .questions(quiz.questionWithAnswers().stream()
+                        .map(questionWithAnswers -> QuestionMapper.toEntity(questionWithAnswers.question()))
+                        .collect(Collectors.toSet()))
+                .build();
     }
+
 }

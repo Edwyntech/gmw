@@ -7,9 +7,13 @@ import java.util.List;
 
 // driven
 public interface QuizStoreSpi {
+    Quiz save(Quiz quiz);
+
     List<Quiz> getAll();
 
     Quiz getDefaultQuiz();
 
     Quiz getQuiz(Long id);
+
+    void delete(Long id);
 }

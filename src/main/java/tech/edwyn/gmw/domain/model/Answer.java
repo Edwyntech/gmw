@@ -1,6 +1,9 @@
 package tech.edwyn.gmw.domain.model;
 
+import lombok.Builder;
+
 import java.util.Optional;
 
-public record Answer(Long id, String value, Optional<String> imageUrl) {
+@Builder
+public record Answer(Long id, Boolean correct, String value, Optional<String> imageUrl) {
 }
