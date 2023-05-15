@@ -16,7 +16,7 @@ public class QuizMapper {
     public static Quiz toDomain(QuizEntity quizEntity) {
         return Quiz.builder()
                 .id(quizEntity.getId())
-                .name(quizEntity.getName())
+                .description(quizEntity.getName())
                 .questionWithAnswers(quizEntity.getQuestions().stream()
                         .map(questionEntity -> QuestionWithAnswers.builder()
                                 .question(QuestionMapper.toDomain(questionEntity))
@@ -32,7 +32,7 @@ public class QuizMapper {
     public static QuizEntity toEntity(Quiz quiz) {
         return  QuizEntity.builder()
                 .id(quiz.id())
-                .name(quiz.name())
+                .name(quiz.description())
                 .questions(quiz.questionWithAnswers().stream()
                         .map(questionWithAnswers -> QuestionMapper.toEntity(questionWithAnswers.question()))
                         .collect(Collectors.toSet()))

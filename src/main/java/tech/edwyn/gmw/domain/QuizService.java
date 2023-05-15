@@ -7,6 +7,7 @@ import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class QuizService implements QuizHandlerApi {
@@ -20,8 +21,13 @@ public class QuizService implements QuizHandlerApi {
     }
 
     @Override
-    public List<Quiz> getAllQuizzes() {
-        return quizStore.getAll();
+    public List<Quiz> getAllQuizzes(String email) {
+        var quizzes = quizStore.getAll();
+        var completedQuizzesIds = userStoreSpi.getCompletedQuizzes(email).stream().map(Quiz::id).toList();
+
+        return quizzes.stream()
+                .map(q -> new Quiz(q.id(), q.description(), completedQuizzesIds.contains(q.id()), q.questionWithAnswers()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -41,7 +47,7 @@ public class QuizService implements QuizHandlerApi {
         if (quizFound == null) throw new QuizNotFoundException("Quiz not found");
 
         quizFound.toBuilder()
-                .name(quiz.name())
+                .description(quiz.description())
                 .questionWithAnswers(quiz.questionWithAnswers())
                 .build();
 

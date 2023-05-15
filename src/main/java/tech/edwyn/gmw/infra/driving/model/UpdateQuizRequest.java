@@ -22,7 +22,7 @@ public class UpdateQuizRequest {
     public Quiz toDomain() {
         return Quiz.builder()
                 .id(id)
-                .name(name)
+                .description(name)
                 .questionWithAnswers(questionWithAnswers)
                 .build();
     }

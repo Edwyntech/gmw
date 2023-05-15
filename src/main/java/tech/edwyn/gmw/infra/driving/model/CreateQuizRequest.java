@@ -19,7 +19,7 @@ public class CreateQuizRequest {
 
     public Quiz toDomain() {
         return Quiz.builder()
-                .name(name)
+                .description(name)
                 .questionWithAnswers(questionWithAnswers)
                 .build();
     }

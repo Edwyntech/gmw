@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder(toBuilder = true)
-public record Quiz(Long id, String name, List<QuestionWithAnswers> questionWithAnswers) {
+public record Quiz(Long id, String description, Boolean done, List<QuestionWithAnswers> questionWithAnswers) {
 }
