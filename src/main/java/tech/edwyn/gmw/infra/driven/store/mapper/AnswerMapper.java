@@ -24,7 +24,7 @@ public class AnswerMapper {
                 .id(answer.id())
                 .correct(answer.correct())
                 .text(answer.value())
-                .imageUrl(answer.imageUrl().get())
+                .imageUrl(answer.imageUrl().orElse(null))
                 .build();
     }
 

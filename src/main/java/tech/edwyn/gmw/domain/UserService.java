@@ -23,6 +23,6 @@ public class UserService implements UserHandlerApi {
     @Override
     public ScoreResponse getScore(String email, Long quizId) {
         Score score = userStoreSpi.getScore(email, quizId);
-        return new ScoreResponse(email, score.getScore(), score.getMaxScore(), score.getText());
+        return new ScoreResponse(email, score.score(), score.maxScore(), score.text());
     }
 }

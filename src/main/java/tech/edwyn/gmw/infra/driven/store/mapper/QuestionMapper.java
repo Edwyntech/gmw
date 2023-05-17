@@ -22,7 +22,7 @@ public class QuestionMapper {
         return QuestionEntity.builder()
                 .id(question.id())
                 .text(question.value())
-                .imageUrl(question.imageUrl().get())
+                .imageUrl(question.imageUrl().orElse(null))
                 .build();
     }
 
