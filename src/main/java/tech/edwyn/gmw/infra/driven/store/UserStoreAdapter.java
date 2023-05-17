@@ -62,8 +62,7 @@ public class UserStoreAdapter implements UserStoreSpi {
                         .size())
                 .orElse(0);
         var maxScore = getMaxScore(quizId);
-        var scorePercentage = (double) scoreValue / maxScore;
-        var text = scorePercentage > 0.5 ? "Bravo !": "";
+        var text = "Merci d'avoir participé au questionnaire, nous te tiendrons informés du résultat de tirage au sort pour déterminer les deux gagnants!";
         return Score.builder()
                 .score(scoreValue)
                 .maxScore(maxScore)
