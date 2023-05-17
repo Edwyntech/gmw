@@ -9,5 +9,5 @@ public interface UserHandlerApi {
 
     Boolean hasAlreadyName(String name);
 
-    ScoreResponse getScore(String name, Long quizzId);
+    ScoreResponse getScore(String email, Long quizId);
 }

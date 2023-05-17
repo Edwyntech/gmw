@@ -9,7 +9,6 @@ import tech.edwyn.gmw.domain.store.UserStoreSpi;
 import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
 import tech.edwyn.gmw.infra.driven.store.exception.GMWException;
 import tech.edwyn.gmw.infra.driven.store.mapper.AnswerMapper;
-import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.mapper.UserMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
 import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;

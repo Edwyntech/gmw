@@ -23,8 +23,8 @@ public class UserController {
         return userHandlerApi.add(request.getFirstName(), request.getLastName(), request.getEmail());
     }
 
-    @GetMapping("/{name}/score")
-    public ScoreResponse getScore(@PathVariable String name, @RequestParam Long quizId) {
-        return userHandlerApi.getScore(name, quizId);
+    @GetMapping("/score")
+    public ScoreResponse getScore(@RequestParam String email, @RequestParam Long quizId) {
+        return userHandlerApi.getScore(email, quizId);
     }
 }
