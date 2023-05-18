@@ -12,7 +12,7 @@ public class AnswerStoreAdapter implements AnswerStoreSpi {
     private final AnswerRepository answerRepository;
 
     @Override
-    public Boolean findIsCorrectByQuestionId(Long questionId, Long answerId) {
+    public boolean findIsCorrectByQuestionId(Long questionId, Long answerId) {
         return answerRepository.findByQuestionId(questionId).stream()
                 .filter(answer -> answer.getId().equals(answerId))
                 .map(AnswerEntity::getCorrect)

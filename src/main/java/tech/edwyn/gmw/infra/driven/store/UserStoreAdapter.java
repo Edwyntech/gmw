@@ -7,9 +7,9 @@ import org.springframework.web.server.ResponseStatusException;
 import tech.edwyn.gmw.domain.model.*;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
 import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
+import tech.edwyn.gmw.infra.driven.store.entity.UserEntity;
 import tech.edwyn.gmw.infra.driven.store.exception.GMWException;
 import tech.edwyn.gmw.infra.driven.store.mapper.AnswerMapper;
-import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.mapper.UserMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuestionRepository;
 import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;
@@ -18,7 +18,6 @@ import tech.edwyn.gmw.infra.driven.store.repository.UserRepository;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -46,11 +45,11 @@ public class UserStoreAdapter implements UserStoreSpi {
     @Override
     public User addCorrectQuestion(String email, Long questionId) {
         var question = questionRepository.findById(questionId);
-        return userRepository.findByEmail(email).map(user -> {
-                            user.getUserCorrectQuestions().add(question.get());
-                            return userRepository.save(user);
-                        }
-                )
+        return userRepository.findByEmail(email)
+                .map(user -> {
+                    user.getUserCorrectQuestions().add(question.orElse(null));
+                    return userRepository.save(user);
+                })
                 .map(UserMapper::toDomain)
                 .orElseThrow();
     }
@@ -63,8 +62,7 @@ public class UserStoreAdapter implements UserStoreSpi {
                         .size())
                 .orElse(0);
         var maxScore = getMaxScore(quizId);
-        var scorePercentage = (double) scoreValue / maxScore;
-        var text = scorePercentage > 0.5 ? "Bravo !": "";
+        var text = "Merci d'avoir participé au questionnaire, nous te tiendrons informés du résultat de tirage au sort pour déterminer les deux gagnants!";
         return Score.builder()
                 .score(scoreValue)
                 .maxScore(maxScore)
@@ -76,7 +74,7 @@ public class UserStoreAdapter implements UserStoreSpi {
     public List<Question> getSuccessfullyQuestions(String email, Long quizId) {
 
         return userRepository.findByEmail(email)
-                .map(user -> user.getUserCorrectQuestions()
+                .map(UserEntity::getUserCorrectQuestions
                 ).orElseThrow().stream().
                 map(QuestionMapper::toDomain).toList();
     }
@@ -92,12 +90,12 @@ public class UserStoreAdapter implements UserStoreSpi {
                                     questionEntity.getAnswers().stream()
                                             .sorted(Comparator.comparing(AnswerEntity::getId))
                                             .map(AnswerMapper::toDomain)
-                                            .collect(Collectors.toList()))).collect(Collectors.toList()));
+                                            .toList())).toList());
                         })
-                        .collect(Collectors.toList()))
+                        .toList())
                 .orElse(Collections.emptyList());
 
-        return quizzes.stream().distinct().collect(Collectors.toList());
+        return quizzes.stream().distinct().toList();
     }
 
     private int getMaxScore(Long quizId) {

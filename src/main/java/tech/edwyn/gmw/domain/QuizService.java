@@ -7,7 +7,6 @@ import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 import tech.edwyn.gmw.domain.store.UserStoreSpi;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class QuizService implements QuizHandlerApi {
@@ -27,7 +26,7 @@ public class QuizService implements QuizHandlerApi {
 
         return quizzes.stream()
                 .map(q -> new Quiz(q.id(), q.description(), completedQuizzesIds.contains(q.id()), q.questionWithAnswers()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -65,7 +64,7 @@ public class QuizService implements QuizHandlerApi {
 
     @Override
     public Boolean verifyAnswer(Long questionId, Long answerId, String email) {
-        var isCorrectAnswer = answerStoreSpi.findIsCorrectByQuestionId(questionId, answerId);
+        boolean isCorrectAnswer = answerStoreSpi.findIsCorrectByQuestionId(questionId, answerId);
 
         if (isCorrectAnswer) {
             userStoreSpi.addCorrectQuestion(email, questionId);

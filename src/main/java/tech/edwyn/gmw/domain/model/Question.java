@@ -4,5 +4,4 @@ import lombok.Builder;
 
 import java.util.Optional;
 @Builder
-public record Question(Long id, String value, Optional<String> imageUrl) {
-}
+public record Question(Long id, String value, Optional<String> imageUrl) { }

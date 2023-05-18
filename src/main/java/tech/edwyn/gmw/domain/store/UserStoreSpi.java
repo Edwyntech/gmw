@@ -16,7 +16,7 @@ public interface UserStoreSpi {
 
     User addCorrectQuestion(String name, Long questionId);
 
-    Score getScore(String name, Long quizId);
+    Score getScore(String email, Long quizId);
 
     List<Question> getSuccessfullyQuestions(String email, Long quizId);
 
