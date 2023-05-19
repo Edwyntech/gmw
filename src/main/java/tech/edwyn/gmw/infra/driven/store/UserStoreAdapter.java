@@ -44,7 +44,7 @@ public class UserStoreAdapter implements UserStoreSpi {
     }
 
     @Override
-    public void addCorremit -mctQuestion(String email, Long questionId) {
+    public void addCorrectQuestion(String email, Long questionId) {
         questionRepository.findById(questionId)
                 .ifPresent(question -> userRepository.findByEmail(email)
                         .ifPresent(user -> {
