@@ -17,8 +17,8 @@ import java.util.List;
 public class QuizController {
     private final QuizHandlerApi quizHandler;
 
-    @GetMapping("/user/{email}")
-    public List<Quiz> getAll(@PathVariable String email) {
+    @GetMapping("/user")
+    public List<Quiz> getAll(@RequestParam String email) {
         return quizHandler.getAllQuizzes(email);
     }
 

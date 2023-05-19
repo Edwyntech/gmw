@@ -67,5 +67,3 @@ insert into questions values (5, 'Can we have multiple quizzes?', null, 2);
 insert into answers values
 (13, 'Yes', true, 5, null),
 (14, 'No', false, 5, null);
-
-insert into users values (1, 'alex', 'alexlastname', 'alex@gmail.com');
