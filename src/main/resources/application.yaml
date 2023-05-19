@@ -16,6 +16,10 @@ spring:
       settings.trace: false
       settings.web-allow-others: true
 server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
   port: 8081
 
 springdoc:

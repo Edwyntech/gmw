@@ -11,8 +11,6 @@ public interface QuizStoreSpi {
 
     List<Quiz> getAll();
 
-    Quiz getDefaultQuiz();
-
     Quiz getQuiz(Long id);
 
     void delete(Long id);

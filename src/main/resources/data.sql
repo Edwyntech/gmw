@@ -26,7 +26,7 @@ create TABLE IF NOT EXISTS users (
 );
 
 create TABLE IF NOT EXISTS user_correct_answers (
-    user_name VARCHAR NOT NULL,
+    user_id VARCHAR NOT NULL,
     question_id   INTEGER NOT NULL
 );
 

@@ -29,7 +29,7 @@ public class UserEntity {
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_correct_answers",
-            joinColumns = { @JoinColumn(name = "user_name") },
+            joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "question_id") }
     )
     private Set<QuestionEntity> userCorrectQuestions = new HashSet<>();

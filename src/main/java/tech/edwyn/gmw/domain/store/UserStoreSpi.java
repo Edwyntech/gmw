@@ -14,11 +14,11 @@ public interface UserStoreSpi {
 
     Boolean hasAlreadyEmail(String email);
 
-    User addCorrectQuestion(String name, Long questionId);
+    void addCorrectQuestion(String email, Long questionId);
 
     Score getScore(String email, Long quizId);
 
     List<Question> getSuccessfullyQuestions(String email, Long quizId);
 
-    List<Quiz> getCompletedQuizzes(String email);
+    List<Long> getCompletedQuizIds(String email);
 }

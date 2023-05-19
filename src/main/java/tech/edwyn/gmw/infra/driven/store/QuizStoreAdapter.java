@@ -28,11 +28,6 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     }
 
     @Override
-    public Quiz getDefaultQuiz() {
-        return getQuiz(1L);
-    }
-
-    @Override
     public Quiz getQuiz(Long id) {
         return quizRepository.findById(id)
                 .map(QuizMapper::toDomain)
