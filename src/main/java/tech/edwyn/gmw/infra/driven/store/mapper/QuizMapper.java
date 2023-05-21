@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import tech.edwyn.gmw.domain.model.QuestionWithAnswers;
 import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.infra.driven.store.entity.AnswerEntity;
+import tech.edwyn.gmw.infra.driven.store.entity.QuestionEntity;
 import tech.edwyn.gmw.infra.driven.store.entity.QuizEntity;
 
 import java.util.Comparator;
@@ -18,6 +19,7 @@ public class QuizMapper {
                 .id(quizEntity.getId())
                 .description(quizEntity.getName())
                 .questionWithAnswers(quizEntity.getQuestions().stream()
+                        .sorted(Comparator.comparingLong(QuestionEntity::getId))
                         .map(questionEntity -> QuestionWithAnswers.builder()
                                 .question(QuestionMapper.toDomain(questionEntity))
                                 .answers(questionEntity.getAnswers().stream()

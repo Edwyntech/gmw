@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import tech.edwyn.gmw.domain.model.Quiz;
 import tech.edwyn.gmw.domain.store.QuizStoreSpi;
+import tech.edwyn.gmw.infra.driven.store.entity.QuizEntity;
 import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -23,6 +25,7 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     @Override
     public List<Quiz> getAll() {
         return quizRepository.findAll().stream()
+                .sorted(Comparator.comparingLong(QuizEntity::getId))
                 .map(QuizMapper::toDomain)
                 .toList();
     }
