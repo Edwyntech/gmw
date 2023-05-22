@@ -34,7 +34,7 @@ INSERT INTO quizzes (name) VALUES ('Edwyn Quiz');
 
 INSERT INTO questions (text, image_url, quiz_id) VALUES ('Définition du Test Driven Development', NULL, 1);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Une approche où les développeurs testent leur code une fois le développement terminé', false, 1, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Une méthode de développement de logiciel qui consiste à concevoir un logiciel par petits pas, de façon itérative et incrémentale, en écrivant chaque test avant d’écrire le code source et en remaniant le code continuellement', true, 1, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Une méthode de développement de logiciel qui consiste à concevoir un logiciel par petits pas, de façon itérative et incrémentale, en écrivant chaque test avant d''écrire le code source et en remaniant le code continuellement', true, 1, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Une technique qui vise à ignorer les tests unitaires lors du développement', false, 1, NULL);
 
 INSERT INTO questions (text, image_url, quiz_id) VALUES ('À quoi fait référence le "L" de SOLID?', NULL, 1);
@@ -109,3 +109,38 @@ INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Software Cr
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Software Craftsmanship', true, 15, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Software Craftemanchip', false, 15, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Software Craftsmanchip', false, 15, NULL);
+
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('La classe AreaCalculator respecte-t-elle le Single Responsibility Principle ?', 'assets/images/SOLID1.png', 1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Oui', false, 16, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode area dans les classes Circle et Square', false, 16, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait extraire les méthodes JSON et HTML dans une classe dédiée', true, 16, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode sum dans les classes de type Shape', false, 16, NULL);
+
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('Cette classe respecte-t-elle le Open-Close Principle ?', 'assets/images/SOLID2.png', 1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Oui', false, 17, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait créer une interface ShapeInterface pour s''assurer que l''objet shape soit bien de type Shape', true, 17, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode area() dans les classes Circle et Square', false, 17, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait faire appel à la méthode area() de l''objet Shape', false, 17, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait refacto la méthode sum() pour plus de généricité', false, 17, NULL);
+
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('Nous souhaitons, en plus du calcul de surface, calculer des volumes. Comment faire pour respecter le Liskov Substitution Principle ?', 'assets/images/SOLID3.png', 1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une interface ShapeCalculatorInterface déclarant la méthode sum() ', false, 18, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator étend la classe AreaCalculator', false, 18, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une classe VolumeCalculator qui implémente la méthode sum() de l''interface ShapeCalculatorInterface', false, 18, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator surcharge la méthode sum() afin de calculer la somme de volumes', false, 18, NULL);
+
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('Maintenant que nous respectons le LSP, comment peut-on faire en sorte que l''Interface Segregation Principle soit respecté ?', 'assets/images/SOLID4.png',  1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Déplacer la méthode volume() de ShapeInterface vers une autre interface SolidShapeInterface', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes Shape et Circle doivent impérativement implémenter les méthodes area() et volume()', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes AreaCalculator et VolumeCalculator implémentent l''interface ComputeManageInterface', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Retirer l''héritage entre AreaCalculator et VolumeCalculator', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une interface ComputeShapeInterface déclarant la méthode sum()', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes ne doivent implémenter uniquement les méthodes dont elles ont besoin', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Renommer la classe SumCalculatorOutputter en AreaSumCalculatorOutputter', false, 19, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une classe VolumeSumCalculatorOutputter identique à AreaSumCalculatorOutputter mais qui gère les VolumeCalculator', false, 19, NULL);
+
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('Que faire pour que ce code respecte le Dependency Inversion Principle ?', 'assets/images/SOLID5.png',  1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les classes AreaCalculator et VolumeCalculator en une seule ShapeCalculator qui définit les méthodes sumArea() et sumVolume()', false, 20, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les AreaSumCalculatorOutputter et VolumeSumCalculatorOutputter en une seule classe SumCalculatorOutputter', false, 20, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ShapeCalculator en paramètre', false, 20, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ComputeShapeInterface en paramètre', false, 20, NULL);
