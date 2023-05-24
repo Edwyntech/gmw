@@ -59,7 +59,7 @@ INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Kent Beck',
 
 INSERT INTO questions (text, image_url, quiz_id) VALUES ('À quoi fait référence la définition suivante dans SOLID : "Les clients ne doivent pas être contraints de dépendre d''interfaces qu''ils n''utilisent pas."', NULL, 1);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Le principe de substitution de Liskov (Liskov Substitution Principle)', false, 6, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Le principe d''inversion de dépendance (Dependency Inversion Principle)', true, 6, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Le principe de ségrégation des interfaces (Interface segregation Principle)', true, 6, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Le principe de responsabilité unique (Single Responsibility Principle)', false, 6, NULL);
 
 INSERT INTO questions (text, image_url, quiz_id) VALUES ('Qu''est-ce qu''un test d''intégration ?', NULL, 1);
@@ -93,10 +93,10 @@ INSERT INTO answers (text, correct, question_id, image_url) VALUES ('A traduire 
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('A protéger les données sensibles contre les attaques de pirates.', false, 12, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('A garantir la cohérence et l''intégrité des données stockées dans une base de données.', false, 12, NULL);
 
-INSERT INTO questions (text, image_url, quiz_id) VALUES ('Pourquoi le flux d''authentification client_credentials de OAuth2 n''est pas adapté aux applications front-end?', NULL, 1);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Il ne permet pas l''interaction avec l''utilisateur pour obtenir les informations d''identification.', true, 13, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Il ne permet pas la gestion des sessions utilisateur nécessaires pour les applications front-end.', false, 13, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Il ne prend pas en charge les protocoles de sécurité requis par les applications front-end.', false, 13, NULL);
+INSERT INTO questions (text, image_url, quiz_id) VALUES ('Quel flux d''authentification OAuth2 est adapté aux applications front-end?', NULL, 1);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('client credentials', false, 13, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('authorization code', false, 13, NULL);
+INSERT INTO answers (text, correct, question_id, image_url) VALUES ('authorization code + PKCE', true, 13, NULL);
 
 INSERT INTO questions (text, image_url, quiz_id) VALUES ('Complète cette phrase : "les trois étape du TDD sont : Red-green- ?"', NULL, 1);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Red', true, 14, NULL);
@@ -116,31 +116,33 @@ INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il fau
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait extraire les méthodes JSON et HTML dans une classe dédiée', true, 16, NULL);
 INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode sum dans les classes de type Shape', false, 16, NULL);
 
-INSERT INTO questions (text, image_url, quiz_id) VALUES ('Cette classe respecte-t-elle le Open-Close Principle ?', 'assets/images/SOLID2.png', 1);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Oui', false, 17, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait créer une interface ShapeInterface pour s''assurer que l''objet shape soit bien de type Shape', true, 17, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode area() dans les classes Circle et Square', false, 17, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait faire appel à la méthode area() de l''objet Shape', false, 17, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait refacto la méthode sum() pour plus de généricité', false, 17, NULL);
+--INSERT INTO questions (text, image_url, quiz_id) VALUES ('Cette classe respecte-t-elle le Open-Close Principle ?', 'assets/images/SOLID2.png', 1);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Oui', false, 17, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait créer une interface ShapeInterface pour s''assurer que l''objet shape soit bien de type Shape', true, 17, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait déporter la méthode area() dans les classes Circle et Square', false, 17, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait faire appel à la méthode area() de l''objet Shape', false, 17, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Non, il faudrait refacto la méthode sum() pour plus de généricité', false, 17, NULL);
+--
+--INSERT INTO questions (text, image_url, quiz_id) VALUES ('Nous souhaitons, en plus du calcul de surface, calculer des volumes. Comment faire pour respecter le Liskov Substitution Principle ?', 'assets/images/SOLID3.png', 1);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une interface ShapeCalculatorInterface déclarant la méthode sum() ', false, 18, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator étend la classe AreaCalculator', false, 18, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une classe VolumeCalculator qui implémente la méthode sum() de l''interface ShapeCalculatorInterface', false, 18, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator surcharge la méthode sum() afin de calculer la somme de volumes', false, 18, NULL);
+--
+--INSERT INTO questions (text, image_url, quiz_id) VALUES ('Maintenant que nous respectons le LSP, comment peut-on faire en sorte que l''Interface Segregation Principle soit respecté ?', 'assets/images/SOLID4.png',  1);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Déplacer la méthode volume() de ShapeInterface vers une autre interface SolidShapeInterface', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes Shape et Circle doivent impérativement implémenter les méthodes area() et volume()', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes AreaCalculator et VolumeCalculator implémentent l''interface ComputeManageInterface', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Retirer l''héritage entre AreaCalculator et VolumeCalculator', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une interface ComputeShapeInterface déclarant la méthode sum()', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes ne doivent implémenter uniquement les méthodes dont elles ont besoin', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Renommer la classe SumCalculatorOutputter en AreaSumCalculatorOutputter', false, 19, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une classe VolumeSumCalculatorOutputter identique à AreaSumCalculatorOutputter mais qui gère les VolumeCalculator', false, 19, NULL);
+--
+--INSERT INTO questions (text, image_url, quiz_id) VALUES ('Que faire pour que ce code respecte le Dependency Inversion Principle ?', 'assets/images/SOLID5.png',  1);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les classes AreaCalculator et VolumeCalculator en une seule ShapeCalculator qui définit les méthodes sumArea() et sumVolume()', false, 20, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les AreaSumCalculatorOutputter et VolumeSumCalculatorOutputter en une seule classe SumCalculatorOutputter', false, 20, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ShapeCalculator en paramètre', false, 20, NULL);
+--INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ComputeShapeInterface en paramètre', false, 20, NULL);
 
-INSERT INTO questions (text, image_url, quiz_id) VALUES ('Nous souhaitons, en plus du calcul de surface, calculer des volumes. Comment faire pour respecter le Liskov Substitution Principle ?', 'assets/images/SOLID3.png', 1);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une interface ShapeCalculatorInterface déclarant la méthode sum() ', false, 18, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator étend la classe AreaCalculator', false, 18, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('En créant une classe VolumeCalculator qui implémente la méthode sum() de l''interface ShapeCalculatorInterface', false, 18, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe VolumeCalculator surcharge la méthode sum() afin de calculer la somme de volumes', false, 18, NULL);
-
-INSERT INTO questions (text, image_url, quiz_id) VALUES ('Maintenant que nous respectons le LSP, comment peut-on faire en sorte que l''Interface Segregation Principle soit respecté ?', 'assets/images/SOLID4.png',  1);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Déplacer la méthode volume() de ShapeInterface vers une autre interface SolidShapeInterface', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes Shape et Circle doivent impérativement implémenter les méthodes area() et volume()', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes AreaCalculator et VolumeCalculator implémentent l''interface ComputeManageInterface', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Retirer l''héritage entre AreaCalculator et VolumeCalculator', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une interface ComputeShapeInterface déclarant la méthode sum()', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Les classes ne doivent implémenter uniquement les méthodes dont elles ont besoin', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Renommer la classe SumCalculatorOutputter en AreaSumCalculatorOutputter', false, 19, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Créer une classe VolumeSumCalculatorOutputter identique à AreaSumCalculatorOutputter mais qui gère les VolumeCalculator', false, 19, NULL);
-
-INSERT INTO questions (text, image_url, quiz_id) VALUES ('Que faire pour que ce code respecte le Dependency Inversion Principle ?', 'assets/images/SOLID5.png',  1);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les classes AreaCalculator et VolumeCalculator en une seule ShapeCalculator qui définit les méthodes sumArea() et sumVolume()', false, 20, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('Factoriser les AreaSumCalculatorOutputter et VolumeSumCalculatorOutputter en une seule classe SumCalculatorOutputter', false, 20, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ShapeCalculator en paramètre', false, 20, NULL);
-INSERT INTO answers (text, correct, question_id, image_url) VALUES ('La classe SumCalculatorOutputter prend des ComputeShapeInterface en paramètre', false, 20, NULL);
+--DROP TABLE ANSWERS, QUESTIONS, QUIZZES, USERS, USER_CORRECT_ANSWERS;
