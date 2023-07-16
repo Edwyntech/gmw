@@ -28,14 +28,12 @@ public class QuestionEntity {
     @ToString.Exclude
     private Set<AnswerEntity> answers;
 
-    @ManyToMany(mappedBy = "userCorrectQuestions")
-    private Set<UserEntity> users = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
     private QuizEntity quiz;
 
-
+    @OneToMany(mappedBy = "question")
+    private Set<UserCorrectAnswerEntity> userCorrectAnswers = new HashSet<>();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -26,13 +26,8 @@ public class UserEntity {
     @Column
     private String email;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "user_correct_answers",
-            joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "question_id") }
-    )
-    private Set<QuestionEntity> userCorrectQuestions = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<UserCorrectAnswerEntity> userCorrectAnswers = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

@@ -27,7 +27,8 @@ create TABLE IF NOT EXISTS users (
 
 create TABLE IF NOT EXISTS user_correct_answers (
     user_id VARCHAR NOT NULL,
-    question_id   INTEGER NOT NULL
+    question_id   INTEGER NOT NULL,
+    creation_date DATE NOT NULL
 );
 
 INSERT INTO quizzes (name) VALUES ('Edwyn Quiz');
