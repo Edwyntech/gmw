@@ -8,7 +8,7 @@ import tech.edwyn.gmw.infra.driving.model.CreateQuizRequest;
 import tech.edwyn.gmw.infra.driving.model.UpdateQuizRequest;
 import tech.edwyn.gmw.infra.driving.model.VerifyAnswerRequest;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController

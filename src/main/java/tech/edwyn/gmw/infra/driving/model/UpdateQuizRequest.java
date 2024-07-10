@@ -5,8 +5,8 @@ import lombok.Value;
 import tech.edwyn.gmw.domain.model.QuestionWithAnswers;
 import tech.edwyn.gmw.domain.model.Quiz;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Value

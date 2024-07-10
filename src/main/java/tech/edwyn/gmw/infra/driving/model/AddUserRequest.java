@@ -2,7 +2,7 @@ package tech.edwyn.gmw.infra.driving.model;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @Data
 public class AddUserRequest {

@@ -2,7 +2,7 @@ package tech.edwyn.gmw.infra.driven.store.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.sql.Date;
 
 @EqualsAndHashCode
