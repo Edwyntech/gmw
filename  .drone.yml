@@ -13,7 +13,7 @@ steps:
     commands:
       - echo "$SSH_PRIVATE_KEY" | tee ./ssh_private_key > /dev/null
       - chmod 600 ./ssh_private_key
-      - rsync --archive --delete --rsh="ssh -i ./ssh_private_key" ./build/web/ $SSH_USER@$SSH_HOSTNAME:~/data
+      - rsync --archive --delete --rsh="ssh -i ./ssh_private_key" ./target/application.jar $SSH_USER@$SSH_HOSTNAME:~/data
       - ssh -i ./ssh_private_key $SSH_USER@$SSH_HOSTNAME "find ~/data -type d -exec chmod 755 {} \;"
       - ssh -i ./ssh_private_key $SSH_USER@$SSH_HOSTNAME "find ~/data -type f -exec chmod 644 {} \;"
       - rm ./ssh_private_key
