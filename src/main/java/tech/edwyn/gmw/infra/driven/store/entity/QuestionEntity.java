@@ -2,13 +2,14 @@ package tech.edwyn.gmw.infra.driven.store.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
+@ToString(exclude = {"answers", "quiz", "userCorrectAnswers"})
 @Builder
 @Entity
 @Table(name = "questions")
@@ -19,27 +20,29 @@ public class QuestionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
     @Column
     private String text;
+
     @Column(name = "image_url")
     private String imageUrl;
 
-    @OneToMany(mappedBy = "question")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private Set<AnswerEntity> answers;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
     private QuizEntity quiz;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private Set<UserCorrectAnswerEntity> userCorrectAnswers = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        QuestionEntity questionEntity = (QuestionEntity) o;
-        return id != null && Objects.equals(id, questionEntity.id);
+        if (!(o instanceof QuestionEntity)) return false;
+        QuestionEntity that = (QuestionEntity) o;
+        return id != null && id.equals(that.getId());
     }
 
     @Override

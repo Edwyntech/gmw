@@ -1,13 +1,13 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
-
 import jakarta.persistence.*;
-import java.util.Objects;
+import lombok.*;
+
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = "questions")
 @Builder
 @Entity
 @Table(name = "quizzes")
@@ -18,19 +18,19 @@ public class QuizEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "quiz")
-    @ToString.Exclude
+    @OneToMany(mappedBy = "quiz", fetch = FetchType.EAGER)
     private Set<QuestionEntity> questions;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        QuizEntity questionEntity = (QuizEntity) o;
-        return id != null && Objects.equals(id, questionEntity.id);
+        if (!(o instanceof QuizEntity)) return false;
+        QuizEntity that = (QuizEntity) o;
+        return id != null && id.equals(that.getId());
     }
 
     @Override

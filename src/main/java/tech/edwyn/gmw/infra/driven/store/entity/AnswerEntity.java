@@ -1,15 +1,11 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.Hibernate;
+import lombok.*;
 
-import java.util.Objects;
-
-@Data
+@Getter
+@Setter
+@ToString(exclude = "question")
 @Builder
 @Entity
 @Table(name = "answers")
@@ -20,10 +16,13 @@ public class AnswerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
     @Column
     private Boolean correct;
+
     @Column
     private String text;
+
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -34,9 +33,9 @@ public class AnswerEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        AnswerEntity answer = (AnswerEntity) o;
-        return id != null && Objects.equals(id, answer.id);
+        if (!(o instanceof AnswerEntity)) return false;
+        AnswerEntity that = (AnswerEntity) o;
+        return id != null && id.equals(that.getId());
     }
 
     @Override

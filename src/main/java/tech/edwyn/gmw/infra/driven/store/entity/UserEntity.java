@@ -1,14 +1,16 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.Hibernate;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString(exclude = "userCorrectAnswers")
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -26,15 +28,15 @@ public class UserEntity {
     @Column
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserCorrectAnswerEntity> userCorrectAnswers = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof UserEntity)) return false;
         UserEntity that = (UserEntity) o;
-        return id != null && Objects.equals(id, that.id);
+        return id != null && id.equals(that.getId());
     }
 
     @Override

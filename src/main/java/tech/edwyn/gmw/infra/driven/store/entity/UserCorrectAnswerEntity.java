@@ -1,11 +1,14 @@
 package tech.edwyn.gmw.infra.driven.store.entity;
 
-import lombok.*;
-
 import jakarta.persistence.*;
-import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@EqualsAndHashCode
+import java.sql.Date;
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -27,4 +30,24 @@ public class UserCorrectAnswerEntity {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserCorrectAnswerEntity)) return false;
+        UserCorrectAnswerEntity that = (UserCorrectAnswerEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "UserCorrectAnswerEntity{" +
+                "id=" + id +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

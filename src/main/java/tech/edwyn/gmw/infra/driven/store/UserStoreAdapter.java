@@ -90,8 +90,8 @@ public class UserStoreAdapter implements UserStoreSpi {
     public List<Long> getCompletedQuizIds(String email) {
         return userRepository.findByEmail(email)
                 .map(UserEntity::getUserCorrectAnswers)
-                .map(uca -> uca.stream().map(UserCorrectAnswerEntity::getQuestion).collect(Collectors.toList()))
-                .map(q -> q.stream().map(qu -> qu.getQuiz().getId()).collect(Collectors.toList()))
+                .map(correctAnswers -> correctAnswers.stream().map(UserCorrectAnswerEntity::getQuestion).collect(Collectors.toList()))
+                .map(questions -> questions.stream().map(question -> question.getQuiz().getId()).collect(Collectors.toList()))
                 .stream().flatMap(Collection::stream).distinct().collect(Collectors.toList());
     }
 

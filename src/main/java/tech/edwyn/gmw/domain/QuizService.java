@@ -25,7 +25,7 @@ public class QuizService implements QuizHandlerApi {
         var completedQuizzesIds = userStoreSpi.getCompletedQuizIds(email);
 
         return quizzes.stream()
-                .map(q -> new Quiz(q.id(), q.description(), completedQuizzesIds.contains(q.id()), q.questionWithAnswers()))
+                .map(quiz -> new Quiz(quiz.id(), quiz.description(), completedQuizzesIds.contains(quiz.id()), quiz.questionWithAnswers()))
                 .toList();
     }
 
