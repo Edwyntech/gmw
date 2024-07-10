@@ -17,6 +17,7 @@ public class CreateQuizRequest {
     @NotNull(message = "Question with answers may not be empty")
     List<QuestionWithAnswers> questionWithAnswers;
 
+
     public Quiz toDomain() {
         return Quiz.builder()
                 .description(name)
