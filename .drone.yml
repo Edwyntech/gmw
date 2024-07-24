@@ -8,6 +8,8 @@ platform:
 steps:
   - name: Build application
     commands:
+      - java -version
+      - mvn -version
       - mvn install
   - name: Deploy production environment
     commands:
