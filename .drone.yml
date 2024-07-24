@@ -10,6 +10,7 @@ steps:
     commands:
       - java -version
       - mvn -version
+      - echo $JAVA_HOME
       - mvn install
   - name: Deploy production environment
     commands:
