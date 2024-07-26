@@ -14,7 +14,6 @@ import lombok.*;
 public class AnswerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column

@@ -18,7 +18,6 @@ import java.util.Set;
 public class QuestionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column

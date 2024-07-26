@@ -16,7 +16,6 @@ import java.util.Set;
 public class QuizEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column
