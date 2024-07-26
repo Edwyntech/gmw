@@ -18,6 +18,7 @@ public class QuizMapper {
         return Quiz.builder()
                 .id(quizEntity.getId())
                 .description(quizEntity.getName())
+                .done(quizEntity.getQuestions().stream().anyMatch(q -> !q.getUserCorrectAnswers().isEmpty()))
                 .questionWithAnswers(quizEntity.getQuestions().stream()
                         .sorted(Comparator.comparingLong(QuestionEntity::getId))
                         .map(questionEntity -> QuestionWithAnswers.builder()

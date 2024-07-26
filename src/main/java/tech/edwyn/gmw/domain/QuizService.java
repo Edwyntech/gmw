@@ -21,12 +21,7 @@ public class QuizService implements QuizHandlerApi {
 
     @Override
     public List<Quiz> getAllQuizzes(String email) {
-        var quizzes = quizStore.getAll();
-        var completedQuizzesIds = userStoreSpi.getCompletedQuizIds(email);
-
-        return quizzes.stream()
-                .map(quiz -> new Quiz(quiz.id(), quiz.description(), completedQuizzesIds.contains(quiz.id()), quiz.questionWithAnswers()))
-                .toList();
+        return quizStore.getAll();
     }
 
     @Override
