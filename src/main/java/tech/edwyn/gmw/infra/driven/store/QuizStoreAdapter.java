@@ -7,6 +7,7 @@ import tech.edwyn.gmw.domain.store.QuizStoreSpi;
 import tech.edwyn.gmw.infra.driven.store.entity.QuizEntity;
 import tech.edwyn.gmw.infra.driven.store.mapper.QuizMapper;
 import tech.edwyn.gmw.infra.driven.store.repository.QuizRepository;
+import tech.edwyn.gmw.infra.driven.store.repository.UserRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuizStoreAdapter implements QuizStoreSpi {
     private final QuizRepository quizRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Quiz save(Quiz quiz) {
@@ -23,10 +25,12 @@ public class QuizStoreAdapter implements QuizStoreSpi {
     }
 
     @Override
-    public List<Quiz> getAll() {
+    public List<Quiz> getAll(String email) {
+        var user = userRepository.findByEmail(email).get();
+
         return quizRepository.findAll().stream()
                 .sorted(Comparator.comparingLong(QuizEntity::getId))
-                .map(QuizMapper::toDomain)
+                .map(quizEntity -> QuizMapper.toDomain(quizEntity, user))
                 .toList();
     }
 

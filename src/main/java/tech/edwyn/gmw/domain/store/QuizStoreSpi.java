@@ -9,7 +9,7 @@ import java.util.List;
 public interface QuizStoreSpi {
     Quiz save(Quiz quiz);
 
-    List<Quiz> getAll();
+    List<Quiz> getAll(String email);
 
     Quiz getQuiz(Long id);
 

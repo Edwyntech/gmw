@@ -21,7 +21,7 @@ public class QuizService implements QuizHandlerApi {
 
     @Override
     public List<Quiz> getAllQuizzes(String email) {
-        return quizStore.getAll();
+        return quizStore.getAll( email);
     }
 
     @Override
